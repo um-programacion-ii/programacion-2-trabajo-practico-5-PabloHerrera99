@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
+import java.util.*;
+
 @Entity
 @Table (name = "departamento")
 @Data
@@ -21,4 +23,7 @@ public class Departamento {
 
     @Column(length = 500)
     private String descripcion;
+
+    @OneToMany(mappedBy = "departamento", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Empleado> empleados = new ArrayList<>();
 }
