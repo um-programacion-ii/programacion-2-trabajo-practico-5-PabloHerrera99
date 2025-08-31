@@ -7,6 +7,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -51,5 +52,10 @@ public class ProyectoServiceImpl implements ProyectoService {
     @Override
     public List<Proyecto> findAll() {
         return proyectoRepository.findAll();
+    }
+
+    @Override
+    public List<Proyecto> findActivo(LocalDate hoy) {
+        return proyectoRepository.findProyectoActivo(hoy);
     }
 }

@@ -2,6 +2,7 @@ package com.empresa.gestion_empleados.service;
 
 import com.empresa.gestion_empleados.entity.Proyecto;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ProyectoService {
@@ -10,6 +11,5 @@ public interface ProyectoService {
     void delete(Long id);
     Proyecto findById(Long id);
     List<Proyecto> findAll();
-
-
+    List<Proyecto> findActivo(LocalDate hoy);
 }
