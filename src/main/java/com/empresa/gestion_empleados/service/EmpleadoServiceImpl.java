@@ -24,7 +24,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public Empleado guardar(Empleado empleado) {
+    public Empleado save(Empleado empleado) {
         if (empleadoRepository.findByEmail(empleado.getEmail()).isPresent()) {
             throw new EmailDuplicadoException(empleado.getEmail());
         }
@@ -32,18 +32,18 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public Empleado buscarPorId(Long id) {
+    public Empleado findbyId(Long id) {
         return empleadoRepository.findById(id)
                 .orElseThrow(() -> new EmpleadoNoEncontradoException(id));
     }
 
     @Override
-    public List<Empleado> buscarPorDepartamento(String nombreDepartamento) {
+    public List<Empleado> findbyDepartamento(String nombreDepartamento) {
         return empleadoRepository.findByNombreDepartamento(nombreDepartamento);
     }
 
     @Override
-    public List<Empleado> buscarPorRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax) {
+    public List<Empleado> findbyRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax) {
         return empleadoRepository.findBySalarioBetween(salarioMin, salarioMax);
     }
 
@@ -54,12 +54,12 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public List<Empleado> obtenerTodos() {
+    public List<Empleado> findAll() {
         return empleadoRepository.findAll();
     }
 
     @Override
-    public Empleado actualizar(Long id, Empleado empleado) {
+    public Empleado update(Long id, Empleado empleado) {
         if (!empleadoRepository.existsById(id)) {
             throw new EmpleadoNoEncontradoException(id);
         }
@@ -68,7 +68,7 @@ public class EmpleadoServiceImpl implements EmpleadoService {
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void delete(Long id) {
         if (!empleadoRepository.existsById(id)) {
             throw new EmpleadoNoEncontradoException(id);
         }

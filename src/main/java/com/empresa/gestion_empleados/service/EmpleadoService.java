@@ -6,12 +6,12 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface EmpleadoService {
-    Empleado guardar(Empleado empleado);
-    Empleado buscarPorId(Long id);
-    List<Empleado> buscarPorDepartamento(String nombreDepartamento);
-    List<Empleado> buscarPorRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax);
+    Empleado save(Empleado empleado);
+    Empleado findbyId(Long id);
+    List<Empleado> findbyDepartamento(String nombreDepartamento);
+    List<Empleado> findbyRangoSalario(BigDecimal salarioMin, BigDecimal salarioMax);
     BigDecimal obtenerSalarioPromedioPorDepartamento(Long departamentoId);
-    List<Empleado> obtenerTodos();
-    Empleado actualizar(Long id, Empleado empleado);
-    void eliminar(Long id);
+    List<Empleado> findAll();
+    Empleado update(Long id, Empleado empleado);
+    void delete(Long id);
 }
