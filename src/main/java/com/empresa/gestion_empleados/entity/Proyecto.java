@@ -25,12 +25,13 @@ public class Proyecto {
     @Column(length = 1000)
     private String descripcion;
 
+    @Column(length = 100)
+    private String estado;
+
     @Column(name = "fecha_inicio")
-    @Temporal(TemporalType.DATE)
     private LocalDate fechaInicio;
 
     @Column(name = "fecha_fin")
-    @Temporal(TemporalType.DATE)
     private LocalDate fechaFin;
 
     @ManyToMany(mappedBy = "proyectos")

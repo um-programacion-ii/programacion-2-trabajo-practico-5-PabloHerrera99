@@ -11,5 +11,5 @@ public interface ProyectoService {
     void delete(Long id);
     Proyecto findById(Long id);
     List<Proyecto> findAll();
-    List<Proyecto> findActivo(LocalDate hoy);
+    List<Proyecto> findByStatus(String status);
 }

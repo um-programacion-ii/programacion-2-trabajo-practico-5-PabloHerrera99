@@ -55,7 +55,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public List<Proyecto> findActivo(LocalDate hoy) {
-        return proyectoRepository.findProyectoActivo(hoy);
+    public List<Proyecto> findByStatus(String status){
+        return proyectoRepository.findByEstado(status);
     }
 }
