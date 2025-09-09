@@ -3,11 +3,9 @@ package com.empresa.gestion_empleados.service;
 import com.empresa.gestion_empleados.entity.Proyecto;
 import com.empresa.gestion_empleados.exeptions.ProyectoNoEncotradoExeption;
 import com.empresa.gestion_empleados.repository.ProyectoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -55,7 +53,7 @@ public class ProyectoServiceImpl implements ProyectoService {
     }
 
     @Override
-    public List<Proyecto> findActivo(LocalDate hoy) {
-        return proyectoRepository.findProyectoActivo(hoy);
+    public List<Proyecto> findByStatus(String status){
+        return proyectoRepository.findByEstado(status);
     }
 }

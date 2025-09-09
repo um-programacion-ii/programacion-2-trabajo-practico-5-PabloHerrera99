@@ -33,9 +33,9 @@ public class ProyectoController {
         }
     }
 
-    @GetMapping("/Activo/{hoy}")
-    public ResponseEntity<List<Proyecto>> findActivo(@PathVariable LocalDate hoy) {
-        return ResponseEntity.ok(proyectoService.findActivo(hoy));
+    @GetMapping("estado/{status}")
+    public ResponseEntity<List<Proyecto>> findByStatus(@PathVariable String status){
+        return ResponseEntity.ok(proyectoService.findByStatus(status));
     }
 
     @PostMapping
