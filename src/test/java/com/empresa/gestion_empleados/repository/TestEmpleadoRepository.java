@@ -43,7 +43,7 @@ public class TestEmpleadoRepository {
         empleado1.setApellido("Pérez");
         empleado1.setEmail("juan.perez@empresa.com");
         empleado1.setFechaContratacion(LocalDate.of(2020, 1, 1));
-        empleado1.setSalario(new BigDecimal("50000.00"));
+        empleado1.setSalario(new BigDecimal("50000"));
         empleado1.setDepartamento(departamento);
 
         empleado2 = new Empleado();
@@ -51,7 +51,7 @@ public class TestEmpleadoRepository {
         empleado2.setApellido("Pérez");
         empleado2.setEmail("pancho.perez@empresa.com");
         empleado2.setFechaContratacion(LocalDate.of(2024, 1, 1));
-        empleado2.setSalario(new BigDecimal("40000.00"));
+        empleado2.setSalario(new BigDecimal("40000"));
         empleado2.setDepartamento(departamento);
     }
 
@@ -121,6 +121,6 @@ public class TestEmpleadoRepository {
         Optional<BigDecimal> promedio = empleadoRepository.findAverageSalarioByDepartamento(departamento.getId());
 
         assertTrue(promedio.isPresent());
-        assertEquals(0, promedio.get().compareTo(new BigDecimal("45000.00")));
+        assertEquals(0, promedio.get().compareTo(new BigDecimal("45000")));
     }
 }

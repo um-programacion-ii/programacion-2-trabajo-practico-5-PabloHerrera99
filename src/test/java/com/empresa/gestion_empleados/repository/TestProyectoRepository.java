@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Transactional
-@ActiveProfiles("mysql")
+@ActiveProfiles("postgres")
 public class TestProyectoRepository {
 
     @Autowired
