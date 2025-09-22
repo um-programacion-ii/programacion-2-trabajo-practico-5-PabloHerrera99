@@ -19,11 +19,19 @@ public class ProyectoController {
     public ProyectoController(ProyectoService proyectoService) {
         this.proyectoService = proyectoService;
     }
+
+    // Obtener todos los proyectos
+    // Método: GET /api/proyectos
+    // Retorna una lista con todos los proyectos registrados en el sistema
     @GetMapping
     public ResponseEntity<List<Proyecto>> findAll() {
         return ResponseEntity.ok(proyectoService.findAll());
     }
 
+    // Buscar un proyecto por su ID
+    // Método: GET /api/proyectos/{id}
+    // Si el proyecto existe, retorna el proyecto correspondiente
+    // Si no existe, devuelve un estado 404 (NOT FOUND)
     @GetMapping("/{id}")
     public ResponseEntity<Proyecto> findById(@PathVariable Long id) {
         try {
@@ -33,16 +41,27 @@ public class ProyectoController {
         }
     }
 
+    // Buscar proyectos por estado
+    // Método: GET /api/proyectos/estado/{status}
+    // Retorna una lista de proyectos que coinciden con el estado proporcionado
     @GetMapping("estado/{status}")
     public ResponseEntity<List<Proyecto>> findByStatus(@PathVariable String status){
         return ResponseEntity.ok(proyectoService.findByStatus(status));
     }
 
+    // Crear un nuevo proyecto
+    // Método: POST /api/proyectos
+    // Recibe un objeto Proyecto en el cuerpo de la petición
+    // Retorna el proyecto creado junto con el estado 201 (CREATED)
     @PostMapping
     public ResponseEntity<Proyecto> create(@RequestBody @Validated Proyecto proyecto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(proyectoService.save(proyecto));
     }
 
+    // Actualizar un proyecto existente por su ID
+    // Método: PUT /api/proyectos/{id}
+    // Si el proyecto existe, lo actualiza y retorna el proyecto modificado
+    // Si no existe, devuelve un estado 404 (NOT FOUND)
     @PutMapping("/{id}")
     public ResponseEntity<Proyecto> update(@PathVariable Long id, @RequestBody @Validated Proyecto proyecto) {
         try {
@@ -52,6 +71,10 @@ public class ProyectoController {
         }
     }
 
+    // Eliminar un proyecto por su ID
+    // Método: DELETE /api/proyectos/{id}
+    // Si el proyecto existe, lo elimina y devuelve estado 204 (NO CONTENT)
+    // Si no existe, devuelve un estado 404 (NOT FOUND)
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         try {
