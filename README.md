@@ -110,8 +110,8 @@ Desarrollar un sistema de gestión de empleados utilizando Spring Boot con JPA, 
 > 💡 **Nota**: Esta estimación considera la complejidad de configurar múltiples bases de datos, Docker y el aprendizaje de JPA. El tiempo incluye la configuración de profiles y la containerización de las bases de datos.
 
 ## 👨‍🎓 Información del Alumno
-- **Nombre y Apellido**: [Nombre y Apellido del Alumno]
-- **Legajo**: [Número de Legajo]
+- **Nombre y Apellido**: Pablo Herrera
+- **Legajo**: 60082
 
 > ⚠️ **IMPORTANTE**: Este trabajo práctico se realiza **INDIVIDUALMENTE**. Aunque se utilizan herramientas de colaboración como Pull Requests y Code Review, estas son para mantener buenas prácticas de desarrollo y un historial ordenado. Todo el desarrollo debe ser realizado por el mismo estudiante.
 
@@ -141,6 +141,269 @@ Desarrollar un sistema de gestión de empleados utilizando Spring Boot con JPA, 
 - JUnit 5.10.1
 - Mockito 5.8.0
 - Git y GitHub
+
+# Instrucciones de Instalación
+
+## Clonar el Repositorio
+```bash
+git clone https://github.com/um-programacion-ii/programacion-2-trabajo-practico-5-PabloHerrera99.git
+cd programacion-2-trabajo-practico-5-PabloHerrera99
+```
+## Configurar Docker
+```bash
+docker compose up -d
+```
+## Ejecutar el Proyecto
+
+```bash
+# Con H2 (desarrollo)
+mvn spring-boot:run -Dspring-boot.run.profiles=dev
+
+# Con MySQL
+mvn spring-boot:run -Dspring-boot.run.profiles=mysql
+
+# Con PostgreSQL
+mvn spring-boot:run -Dspring-boot.run.profiles=postgres
+```
+## Ejecutar Tests
+
+```bash
+# Con H2 (desarrollo)
+mvn test -Dspring.profiles.active=dev
+
+# Con MySQL
+mvn test -Dspring.profiles.active=mysql
+
+# Con PostgreSQL
+mvn test -Dspring.profiles.active=postgres
+```
+
+# Documentación de Endpoints
+# Empleados
+## Obtener todos los empleados
+```bash
+GET /api/empleados
+Devuelve la lista completa de empleados.
+Uso: Consultar todos los registros disponibles en el sistema.
+```
+## Obtener un empleado por ID
+```bash
+GET /api/empleados/{id}
+Busca un empleado por su identificador único.
+```
+### Respuestas posibles:
+```bash
+200 OK: Si se encuentra el empleado.
+404 Not Found: Si no existe el empleado.
+```
+## Crear un nuevo empleado
+```bash
+POST /api/empleados
+Crea un nuevo empleado en la base de datos.
+Uso: Alta de empleados.
+Body esperado (JSON):
+{
+"nombre": "Juan",
+"apellido": "Pérez",
+"email": "juan.perez@empresa.com
+"salario": 50000,
+"departamento": {
+"id": 1,
+"nombre": "Recursos Humanos"
+}
+```
+### Respuestas posibles:
+```bash
+201 Created: Si se crea el empleado correctamente.
+400 Bad Request: Si el email ya está en uso.
+```
+## Actualizar un empleado existente
+```bash
+PUT /api/empleados/{id}
+Modifica los datos de un empleado.
+Uso: Editar la información de un empleado existente.
+Body esperado (JSON):
+{
+"nombre": "Juan Carlos",
+"apellido": "Pérez",
+"email": "juan.c.perez@empresa.com
+"salario": 55000,
+"departamento": {
+"id": 1,
+"nombre": "Recursos Humanos"
+}
+```
+### Respuestas posibles:
+```bash
+200 OK: Si la actualización es exitosa.
+404 Not Found: Si no existe el empleado.
+```
+## Eliminar un empleado
+```bash
+DELETE /api/empleados/{id}
+Elimina un empleado de la base de datos.
+Uso: Baja de empleados.
+```
+### Respuestas posibles:
+```bash
+204 No Content: Si se elimina correctamente.
+404 Not Found: Si no existe el empleado.
+```
+## Buscar empleados por nombre de departamento
+```bash
+GET /api/empleados/departamento/{nombreDepartamento}
+Devuelve todos los empleados que pertenecen a un departamento específico.
+Uso: Listar empleados filtrados por departamento.
+```
+## Obtener salario promedio por departamento
+```bash
+GET /api/empleados/salario_promedio/{depertamentoId}
+Devuelve el salario promedio de los empleados de un departamento.
+Uso: Consultar estadísticas salariales.
+```
+## Buscar empleados dentro de un rango salarial
+```bash
+GET /api/empleados/rango-salario?salarioMin=30000&salarioMax=60000
+Devuelve empleados cuyo salario esté dentro del rango indicado.
+Uso: Filtrar empleados por rango salarial.
+```
+### Parámetros de consulta:
+```bash
+salarioMin: salario mínimo (ejemplo: 30000)
+salarioMax: salario máximo (ejemplo: 60000)
+```
+# Proyectos
+## Obtener todos los proyectos
+```bash
+GET /api/proyectos
+Devuelve la lista completa de proyectos.
+Uso: Consultar todos los proyectos disponibles en el sistema.
+```
+## Obtener un proyecto por ID
+```bash
+GET /api/proyectos/{id}
+Busca un proyecto por su identificador único.
+```
+### Respuestas posibles:
+```bash
+200 OK: Si se encuentra el proyecto.
+404 Not Found: Si no existe el proyecto.
+```
+## Buscar proyectos por estado
+```bash
+GET /api/proyectos/estado/{status}
+Devuelve todos los proyectos que coincidan con un estado específico (ejemplo: "EN_PROGRESO", "FINALIZADO").
+Uso: Filtrar proyectos por estado.
+```
+## Crear un nuevo proyecto
+```bash
+POST /api/proyectos
+```
+## Crea un nuevo proyecto en la base de datos.
+```bash
+Uso: Alta de proyectos.
+Body esperado (JSON):
+{
+"nombre": "Sistema de Inventario",
+"descripcion": "Proyecto para gestionar el inventario de la empresa",
+"estado": "EN_PROGRESO",
+"fechaInicio": "2025-01-10",
+"fechaFin": "2025-06-30"
+}
+```
+### Respuestas posibles:
+```bash
+201 Created: Si se crea correctamente el proyecto.
+```
+## Actualizar un proyecto existente
+```bash
+PUT /api/proyectos/{id}
+Modifica los datos de un proyecto existente.
+Uso: Editar información de un proyecto.
+Body esperado (JSON):
+{
+"nombre": "Sistema de Inventario v2",
+"descripcion": "Proyecto actualizado con nuevas funcionalidades",
+"estado": "FINALIZADO",
+"fechaInicio": "2025-01-10",
+"fechaFin": "2025-06-30"
+}
+```
+### Respuestas posibles:
+```bash
+200 OK: Si la actualización es exitosa.
+404 Not Found: Si no existe el proyecto.
+```
+## Eliminar un proyecto
+```bash
+DELETE /api/proyectos/{id}
+Elimina un proyecto de la base de datos.
+Uso: Baja de proyectos.
+```
+### Respuestas posibles:
+```bash
+204 No Content: Si se elimina correctamente.
+404 Not Found: Si no existe el proyecto.
+```
+# Departamentos
+## Obtener todos los departamentos
+```bash
+GET /api/departamentos
+Devuelve la lista completa de departamentos.
+Uso: Consultar todos los departamentos registrados en el sistema.
+```
+## Obtener un departamento por ID
+```bash
+GET /api/departamentos/{id}
+Busca un departamento por su identificador único.
+```
+### Respuestas posibles:
+```bash
+200 OK: Si se encuentra el departamento.
+404 Not Found: Si no existe el departamento.
+```
+## Crear un nuevo departamento
+```bash
+POST /api/departamentos
+Crea un nuevo departamento en la base de datos.
+Uso: Alta de departamentos.
+Body esperado (JSON):
+{
+"nombre": "Recursos Humanos",
+"descripcion": "Departamento encargado de la gestión del personal"
+}
+```
+### Respuestas posibles:
+```bash
+201 Created: Si se crea correctamente el departamento.
+```
+## Actualizar un departamento existente
+```bash
+PUT /api/departamentos/{id}
+Modifica los datos de un departamento.
+Uso: Editar información de un departamento existente.
+Body esperado (JSON):
+{
+"nombre": "Recursos Humanos",
+"descripcion": "Área encargada de la gestión de personal y nómina"
+}
+```
+### Respuestas posibles:
+```bash
+200 OK: Si la actualización es exitosa.
+404 Not Found: Si no existe el departamento.
+```
+## Eliminar un departamento
+```bash
+DELETE /api/departamentos/{id}
+Elimina un departamento de la base de datos.
+Uso: Baja de departamentos.
+```
+### Respuestas posibles:
+```bash
+204 No Content: Si se elimina correctamente.
+404 Not Found: Si no existe el departamento.
+```
 
 ## 📊 Casos de Uso del Sistema
 
